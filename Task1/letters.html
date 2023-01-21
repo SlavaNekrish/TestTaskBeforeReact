@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>letters</title>
+</head>
+<body>
+  <script>
+    const letters = (a, b) => {
+        let letter = a.charCodeAt();
+        const taimer = setInterval(() => {
+          letter > b.charCodeAt() ? clearInterval(taimer) : console.log(String.fromCharCode(letter)), letter++;
+        }, 1000) 
+      }
+    
+    letters("H", "W")
+  </script>
+</body>
+</html>
