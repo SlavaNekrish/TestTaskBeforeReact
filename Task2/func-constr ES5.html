@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>func-constr ES5</title>
+</head>
+
+<div id="field"></div>
+<!-- <input type=button onclick='testLoadData()' value='загрузить JSON'> -->
+
+<script src='https://fe.it-academy.by/JQ/jquery.js'></script>
+
+<script>
+
+    // Описываем функцию-конструктор PoemButton
+
+    function PoemButton (buttonNumber, Text) {
+      this.buttonNumber = buttonNumber;
+      this.Text = Text;
+
+      PoemButton.prototype.createButton = function () {
+        let button = document.createElement('input');
+        button.type = 'button';
+        button.addEventListener("click", buttonPressed);
+        button.value = this.buttonNumber;
+        document.getElementById('field').appendChild(button);
+     
+        function buttonPressed (EO) {
+          alert(Text)  
+        }
+      }
+    }
+
+    // Загружаем через AJAX файл JSON
+
+    function testLoadData() {
+        $.ajax("http://fe.it-academy.by/Examples/test_JSE.json",
+            { type:'GET', dataType:'json', success:dataLoaded, error:errorHandler }
+        );
+    }
+
+    testLoadData()
+
+    // Создаем по полученным данным объекты, наследующие от функции-конструктора PoemButton
+
+    function dataLoaded(data) {
+        for (let element of data) {
+          let butCapt = element.buttonCaption;
+          let txt = element.alertText;
+          let newButton = new PoemButton (butCapt, txt); 
+          newButton.createButton()
+        }
+    }
+
+    function errorHandler(jqXHR,statusStr,errorStr) {
+        alert(statusStr+' '+errorStr);
+    }
+
+</script>
+</body>
+</html>
