@@ -26,13 +26,9 @@
     // Фильтруем регулярным выражением и выводим в консоль результат
 
     function dataLoaded(data) {
-        console.log('загруженные через AJAX данные:');
-        console.log(data.match(/"hello привет.??goodbye пока./g));
-
+        let arrSet = new Set(data.match(/("h.*[!o]")|('g.*а')|(["']hello привет(..|.?|...)goodbye пока["'])|(".*\\u2665.*\\xA5")/g));
+        arrSet.forEach(el => console.log(el.split('" ').join('"')))
     }
-
-    // ["']hello привет!["']|'goodbye пока'|
-
 
     function errorHandler(jqXHR,statusStr,errorStr) {
         alert(statusStr+' '+errorStr);
