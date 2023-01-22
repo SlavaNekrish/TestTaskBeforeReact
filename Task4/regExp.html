@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>func-constr ES5</title>
+</head>
+
+<div id="field"></div>
+
+<script src='https://fe.it-academy.by/JQ/jquery.js'></script>
+
+<script>
+
+    // Загружаем через AJAX файл TXT
+
+    function testLoadData() {
+        $.ajax("https://fe.it-academy.by/Examples/test_JSE.txt",
+            { type:'GET', dataType:'text', success:dataLoaded, error:errorHandler }
+        );
+    }
+
+    testLoadData()
+
+    // Фильтруем регулярным выражением и выводим в консоль результат
+
+    function dataLoaded(data) {
+        console.log('загруженные через AJAX данные:');
+        console.log(data.match(/"hello привет.??goodbye пока./g));
+
+    }
+
+    // ["']hello привет!["']|'goodbye пока'|
+
+
+    function errorHandler(jqXHR,statusStr,errorStr) {
+        alert(statusStr+' '+errorStr);
+    }
+
+</script>
+</body>
+</html>
