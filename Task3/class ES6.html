@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>class ES6</title>
+</head>
+
+<div id="field"></div>
+
+<script>
+    "use strict"
+
+    // Описываем class PoemButton
+
+    class PoemButton {
+      constructor (buttonNumber, Text) {
+        this.buttonNumber = buttonNumber;
+        this.Text = Text;
+      }
+
+      
+      createButton() {
+        let buttonPressed = (e) => {
+          alert(this.Text)  
+        }
+        let button = document.createElement('input');
+        button.type = 'button';
+        button.addEventListener("click", buttonPressed);
+        button.value = this.buttonNumber;
+        document.getElementById('field').appendChild(button);
+     
+      }
+    }
+
+    // Загружаем через fetch файл JSON и парсим его в массив
+
+    fetch("http://fe.it-academy.by/Examples/test_JSE.json")
+    .then(response => response.json())
+
+    // Создаем по полученным данным объекты, наследующие от функции-конструктора PoemButton 
+    
+    .then (json => {
+        for (let element of json) {
+          let butCapt = element.buttonCaption;
+          let txt = element.alertText;
+          let newButton = new PoemButton (butCapt, txt); 
+          newButton.createButton()
+        }
+    })
+
+</script>
+</body>
+</html>
